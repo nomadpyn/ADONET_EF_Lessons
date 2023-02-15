@@ -1,2 +1,4 @@
 # ADONET_Lessons
- Task for Lessons ADO.NET на C#
+ Решение задач на уроках по курсу "Технология ADO.NET"
+
+ ##[Библиотека]
