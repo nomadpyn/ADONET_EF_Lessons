@@ -3,7 +3,7 @@ using System.Data;
 
 string connection = @"Data Source = (localdb)\MSSQLLocalDB; Initial Catalog = Library; Integrated Security = true";
 
-
+getCountAthrsAndBks(connection);
 
 //метод добавления данных об авторе в базу данных localDb
 static void addAuthorToDb(string connString)
@@ -36,7 +36,7 @@ static void addAuthorToDb(string connString)
         Console.WriteLine(ex.Message);
     }
 }
-// метод добавления данных об книге в базу данных localDb
+//метод добавления данных об книге в базу данных localDb
 static void addBookToDb(string connString)
 {
     try
@@ -96,6 +96,31 @@ static void addBookToDb(string connString)
         conn.Close();
     }
     catch (Exception ex)
+    {
+        Console.WriteLine(ex.Message);
+    }
+}
+//метод вывода на экран количества авторов и количество книг в базе данных
+static void getCountAthrsAndBks(string connString)
+{
+    try 
+    { 
+        SqlConnection conn = new SqlConnection(connString);
+        conn.Open();
+
+        SqlCommand cmd = new SqlCommand(connString, conn);
+
+        cmd.CommandText = "Select COUNT (id) From Authors";
+        var countAthrs = cmd.ExecuteScalar();
+        cmd.CommandText = "Select COUNT (id) From Books";
+        var countBks = cmd.ExecuteScalar();
+
+        Console.WriteLine($"В базе данных авторов: {countAthrs}");
+        Console.WriteLine($"В базе данных книг: {countBks}");
+
+        conn.Close();
+    }
+    catch(Exception ex)
     {
         Console.WriteLine(ex.Message);
     }
