@@ -3,7 +3,7 @@ using System.Data;
 
 string connection = @"Data Source = (localdb)\MSSQLLocalDB; Initial Catalog = Library; Integrated Security = true";
 
-getCountAthrsAndBks(connection);
+
 
 //метод добавления данных об авторе в базу данных localDb
 static void addAuthorToDb(string connString)
@@ -122,6 +122,37 @@ static void getCountAthrsAndBks(string connString)
     }
     catch(Exception ex)
     {
+        Console.WriteLine(ex.Message);
+    }
+}
+//метод вычисления суммы всех книг и суммы всех страниц в таблице Books
+static void calcSumBooks(string connString)
+{
+    try 
+    {
+        SqlConnection conn = new SqlConnection(connString);
+        conn.Open();
+
+        int sumPrice = 0, sumPages = 0;
+
+        string getString = "Select Title,Price,Pages From Books";
+        SqlCommand cmd = new SqlCommand(getString, conn);
+        
+        SqlDataReader reader = cmd.ExecuteReader();
+
+        while (reader.Read())
+        {
+            Console.WriteLine($"Книга : {reader["Title"]}");
+            Console.WriteLine($"{reader["Pages"]} страниц, цена {reader["Price"]} руб.");
+            sumPages += (int)reader["Pages"];
+            sumPrice += (int)reader["Price"];
+        }
+        Console.WriteLine($"Все книги стоят {sumPrice} руб и в них суммарно страниц - {sumPages}");
+
+        conn.Close();
+    }
+    catch(Exception ex) 
+    { 
         Console.WriteLine(ex.Message);
     }
 }
