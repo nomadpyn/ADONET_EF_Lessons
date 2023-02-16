@@ -82,3 +82,30 @@ static SqlParameter[] GetParameters()
 
     return new SqlParameter[] {paramName,paramType, paramColor, paramCalories};
 } 
+
+static void showAllData(ref SqlConnection conn)
+{
+    try
+    {
+        conn.Open();
+
+        string select = "Select * From Veg_Fru";
+
+        SqlCommand cmd = new SqlCommand(select, conn);
+
+        SqlDataReader data = cmd.ExecuteReader();
+
+        while (data.Read())
+        {
+            Console.WriteLine($"{data["Name"]} Цвет {data["Color"]}, калорийность {data["Calories"]}");
+        }
+        data.Close();
+
+        conn.Close();
+    }
+    catch (Exception ex)
+    {
+
+        Console.WriteLine(ex.Message);
+    }
+}
