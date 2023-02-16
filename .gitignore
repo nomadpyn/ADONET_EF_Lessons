@@ -18,3 +18,7 @@ l1_Library/l1_Library/obj/Debug/net6.0/l1_Library.GlobalUsings.g.cs
 *.targets
 *.v2
 *.2
+l2_Veg_Frt/.vs/l2_Veg_Frt/v17/.suo
+l2_Veg_Frt/obj/Debug/net6.0/.NETCoreApp,Version=v6.0.AssemblyAttributes.cs
+l2_Veg_Frt/obj/Debug/net6.0/l2_Veg_Frt.AssemblyInfo.cs
+l2_Veg_Frt/obj/Debug/net6.0/l2_Veg_Frt.GlobalUsings.g.cs
