@@ -4,7 +4,7 @@ using System.Data;
 
 SqlConnection connection = new SqlConnection(@"Data Source = (localdb)\MSSQLLocalDB; Initial Catalog = Vegetables_Fruits; Integrated Security = true");
 
-agrFunc(ref connection);
+
 
 static void addDataToDb(ref SqlConnection conn)
 {
@@ -203,6 +203,37 @@ static void agrFunc(ref SqlConnection conn, string arg = "AVG")
             }
             reader.Close();
         }
+        conn.Close();
+    }
+    catch (Exception ex)
+    {
+
+        Console.WriteLine(ex.Message);
+    }
+}
+
+static void calcCountVegAndFruits(ref SqlConnection conn)
+{
+    try
+    {
+        conn.Open();
+
+        string selectVeg = "Select Name,Type From Veg_Fru";
+
+        SqlCommand cmd = new SqlCommand(selectVeg, conn);
+
+        var reader = cmd.ExecuteReader();
+        int countV = 0;
+        int countF = 0;
+        while (reader.Read())
+        {
+            if ((string)reader["Type"] == "Овощ")
+                countV++;
+            else
+                countF++;
+        }
+        Console.WriteLine($"Овощей всего: {countV}, Фруктов всего: {countF}");
+        reader.Close();
         conn.Close();
     }
     catch (Exception ex)
