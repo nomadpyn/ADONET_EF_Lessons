@@ -1,5 +1,4 @@
 ﻿using Microsoft.Data.SqlClient;
-using Microsoft.IdentityModel.Tokens;
 using System.Data;
 
 SqlConnection connection = new SqlConnection(@"Data Source = (localdb)\MSSQLLocalDB; Initial Catalog = Vegetables_Fruits; Integrated Security = true");
@@ -262,4 +261,48 @@ static void calcCountByColor(ref SqlConnection conn, string color)
 
         Console.WriteLine(ex.Message);
     }
+}
+
+static void showByCalories(ref SqlConnection conn, int digit, char direction = '<')
+{
+    if (!(direction != '<' || direction != '>'))
+    {
+        direction = '<';
+    }
+    if(digit <= 0)
+    {
+        digit = 1;
+    }
+
+    try
+    {
+        conn.Open();
+
+        string select = $"Select * From Veg_Fru Where Calories < {digit}";
+        string message = $"Эти продукты имею меньшую калорийность, чем {digit}";
+
+        if (direction == '>')
+        {
+            select = $"Select * From Veg_Fru Where Calories > {digit}";
+            message = $"Эти продукты имею большую калорийность, чем {digit}";
+        }
+
+        SqlCommand cmd = new SqlCommand(select, conn);
+
+        var reader = cmd.ExecuteReader();
+
+        Console.WriteLine(message);
+        while (reader.Read())
+        {
+            Console.WriteLine($"{reader["Name"]} {reader["Color"]}, {reader["Calories"]} ккал");
+        }
+        reader.Close();
+
+        conn.Close();
+    }
+    catch(Exception ex)
+    {
+        Console.WriteLine(ex.Message);
+    }
+
 }
