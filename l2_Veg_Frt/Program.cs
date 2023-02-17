@@ -242,3 +242,24 @@ static void calcCountVegAndFruits(ref SqlConnection conn)
         Console.WriteLine(ex.Message);
     }
 }
+
+static void calcCountByColor(ref SqlConnection conn, string color)
+{
+    try
+    {
+        conn.Open();
+
+        string selectVeg = $"Select Count(Color) From Veg_Fru Where Color = N'{color}'";
+
+        SqlCommand cmd = new SqlCommand(selectVeg, conn);
+
+        var countC = cmd.ExecuteScalar();
+        Console.WriteLine($"Овощей и фруктов цвета {color} {countC}");
+        conn.Close();
+    }
+    catch (Exception ex)
+    {
+
+        Console.WriteLine(ex.Message);
+    }
+}
