@@ -109,3 +109,57 @@ static void showAllData(ref SqlConnection conn)
         Console.WriteLine(ex.Message);
     }
 }
+
+static void showNames(ref SqlConnection conn) 
+{
+    try
+    {
+        conn.Open();
+
+        string select = "Select Distinct Name From Veg_Fru";
+
+        SqlCommand cmd = new SqlCommand(select, conn);
+
+        SqlDataReader data = cmd.ExecuteReader();
+
+        while (data.Read())
+        {
+            Console.WriteLine($"{data["Name"]}");
+        }
+        data.Close();
+
+        conn.Close();
+    }
+    catch (Exception ex)
+    {
+
+        Console.WriteLine(ex.Message);
+    }
+}
+
+static void showColors(ref SqlConnection conn)
+{
+    try
+    {
+        conn.Open();
+
+        string select = "Select Distinct Color From Veg_Fru";
+
+        SqlCommand cmd = new SqlCommand(select, conn);
+
+        SqlDataReader data = cmd.ExecuteReader();
+
+        while (data.Read())
+        {
+            Console.WriteLine($"{data["Color"]}");
+        }
+        data.Close();
+
+        conn.Close();
+    }
+    catch (Exception ex)
+    {
+
+        Console.WriteLine(ex.Message);
+    }
+}
