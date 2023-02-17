@@ -4,7 +4,7 @@ using System.Data;
 
 SqlConnection connection = new SqlConnection(@"Data Source = (localdb)\MSSQLLocalDB; Initial Catalog = Vegetables_Fruits; Integrated Security = true");
 
-
+agrFunc(ref connection);
 
 static void addDataToDb(ref SqlConnection conn)
 {
@@ -155,6 +155,54 @@ static void showColors(ref SqlConnection conn)
         }
         data.Close();
 
+        conn.Close();
+    }
+    catch (Exception ex)
+    {
+
+        Console.WriteLine(ex.Message);
+    }
+}
+
+static void agrFunc(ref SqlConnection conn, string arg = "AVG") 
+{
+    if(!(arg != "avg" || arg != "max" || arg !="min"))
+    {
+        arg = "AVG";
+    }
+    try
+    {
+        conn.Open();
+
+        string select = "Select AVG(Calories) AS Data From Veg_Fru";
+        string message = "Среднее значение калорий";
+        if(arg == "max")
+        {
+            select = "Select MAX(Calories) AS Data From Veg_Fru";
+            message = "Максимальное значений калорий";
+        }
+        if (arg == "min")
+        {
+            select = "Select MIN(Calories) AS Data From Veg_Fru";
+            message = "Минимальное значений калорий";
+        }
+
+        SqlCommand cmd = new SqlCommand(select, conn);
+
+        var digit = cmd.ExecuteScalar();
+        Console.WriteLine(message);
+        Console.WriteLine(digit);
+        if (arg == "min" || arg == "max")
+        {
+            string getName = $"SELECT Name From Veg_Fru Where Calories ={digit}";
+            cmd.CommandText = getName;
+            var reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                Console.WriteLine($"{reader["Name"]}");
+            }
+            reader.Close();
+        }
         conn.Close();
     }
     catch (Exception ex)
