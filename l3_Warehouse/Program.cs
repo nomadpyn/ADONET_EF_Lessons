@@ -5,7 +5,7 @@ using Microsoft.Data.SqlClient;
 string connection = @"Data Source = (localdb)\MSSQLLocalDB; Initial Catalog = Warehouse; Integrated Security = true";
 SqlConnection conn = new SqlConnection(connection);
 
-showProduct(ref conn);
+showMinOrMaxCount(ref conn, "max");
 static List<int> showAllProducts(ref SqlConnection conn)
 {
     List<int> indexes = new List<int>();
@@ -82,4 +82,73 @@ static void showProduct(ref SqlConnection conn)
         Console.WriteLine(ex.Message);
     }
 }
-   
+
+static void showTypesOrProviders(ref SqlConnection conn, string arg = "min")
+{
+    string sel = "select typeName from prdType";
+    string message = "Список типов товаров:";
+    if(arg == "provider") 
+    {
+        sel = "select provName from prdProvider";
+        message = "Список поставщиков:";
+    }
+
+    try
+    {
+        SqlDataAdapter adapter = new SqlDataAdapter(sel, conn);
+
+        DataTable data = new DataTable();
+
+        adapter.Fill(data);
+
+        Console.WriteLine(message);
+        foreach (DataRow row in data.Rows)
+        {
+            var cells = row.ItemArray; 
+            foreach (var cell in cells)
+            {
+                Console.Write(cell + "\t");
+            }
+            Console.WriteLine();
+        }
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex.Message);
+    }
+}
+
+static void showMinOrMaxCount(ref SqlConnection conn, string arg = "min")
+{
+    string sel = "SELECT prodName, prodCount FROM Products WHERE prodCount = (SELECT MIN(prodCount) From Products)";
+    string message = "Товар с минимальным количеством :";
+    if (arg == "max")
+    {
+        sel = "SELECT prodName, prodCount FROM Products WHERE prodCount = (SELECT MAX(prodCount) From Products)";
+        message = "Товар с максимальным количеством :";
+    }
+
+    try
+    {
+        SqlDataAdapter adapter = new SqlDataAdapter(sel, conn);
+
+        DataTable data = new DataTable();
+
+        adapter.Fill(data);
+
+        Console.WriteLine(message);
+        foreach (DataRow row in data.Rows)
+        {
+            var cells = row.ItemArray;
+            foreach (var cell in cells)
+            {
+                Console.Write(cell + "\t");
+            }
+            Console.WriteLine();
+        }
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex.Message);
+    }
+}
