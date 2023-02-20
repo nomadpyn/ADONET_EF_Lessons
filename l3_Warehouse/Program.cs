@@ -5,7 +5,7 @@ using Microsoft.Data.SqlClient;
 string connection = @"Data Source = (localdb)\MSSQLLocalDB; Initial Catalog = Warehouse; Integrated Security = true";
 SqlConnection conn = new SqlConnection(connection);
 
-showMinOrMaxSelfPrice(ref conn);
+
 static List<int> showAllProducts(ref SqlConnection conn)
 {
     List<int> indexes = new List<int>();
@@ -83,13 +83,15 @@ static void showProduct(ref SqlConnection conn)
     }
 }
 
-static void showTypesOrProviders(ref SqlConnection conn, string arg = "min")
+static List<int> showTypesOrProviders(ref SqlConnection conn, string arg = "type")
 {
-    string sel = "select typeName from prdType";
+    List<int>indexes = new List<int>();
+
+    string sel = "select id, typeName from prdType order by id";
     string message = "Список типов товаров:";
     if(arg == "provider") 
     {
-        sel = "select provName from prdProvider";
+        sel = "select id, provName from prdProvider order by id";
         message = "Список поставщиков:";
     }
 
@@ -104,10 +106,11 @@ static void showTypesOrProviders(ref SqlConnection conn, string arg = "min")
         Console.WriteLine(message);
         foreach (DataRow row in data.Rows)
         {
-            var cells = row.ItemArray; 
+            var cells = row.ItemArray;
+            indexes.Add((int)cells[0]);
             foreach (var cell in cells)
             {
-                Console.Write(cell + "\t");
+                Console.Write(cell + " ");
             }
             Console.WriteLine();
         }
@@ -116,6 +119,8 @@ static void showTypesOrProviders(ref SqlConnection conn, string arg = "min")
     {
         Console.WriteLine(ex.Message);
     }
+
+    return indexes;
 }
 
 static void showMinOrMaxCount(ref SqlConnection conn, string arg = "min")
@@ -178,6 +183,93 @@ static void showMinOrMaxSelfPrice(ref SqlConnection conn, string arg = "min")
             foreach (var cell in cells)
             {
                 Console.Write(cell + "\t");
+            }
+            Console.WriteLine();
+        }
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex.Message);
+    }
+}
+
+static void showAllByTypeOrProvider(ref SqlConnection conn, string arg = "type")
+{
+    
+    string message = "Список типов товаров:";
+    if (arg == "provider")
+    {
+        message = "Список поставщиков:";
+    }
+    Console.WriteLine(message);
+
+    List<int> ind = showTypesOrProviders(ref conn, arg);
+
+    int choise = -1;
+    do
+    {
+        Console.WriteLine("Выберите по индексу");
+        if (Int32.TryParse(Console.ReadLine(), out choise))
+        {
+            if (!ind.Contains(choise))
+            {
+                Console.WriteLine("Вы неправильно выбрали, попробуйте еще раз");
+            }
+
+        }
+        else
+            Console.WriteLine("Вы неправильно выбрали, попробуйте еще раз");
+    }
+    while (!ind.Contains(choise));
+
+    string sel = $"select  prodName From Products AS P, prdType AS pT Where P.typeId = pT.id AND P.typeId = {choise}";
+    if(arg == "provider")
+    {
+        sel = $"select prodName From Products AS P, prdProvider AS pP Where P.provId = pP.id AND P.provId = {choise}";
+    }
+
+    try
+    {
+        SqlDataAdapter adapter = new SqlDataAdapter(sel, conn);
+
+        DataTable data = new DataTable();
+
+        adapter.Fill(data);
+
+        foreach (DataRow row in data.Rows)
+        {
+            var cells = row.ItemArray;
+            foreach (var cell in cells)
+            {
+                Console.Write(cell + " ");
+            }
+            Console.WriteLine();
+        }
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex.Message);
+    }
+}
+
+static void oldestProduct (ref SqlConnection conn)
+{
+    string sel = "select id, prodName, prodDate From Products WHERE prodDate = (SELECT MIN(prodDate) From Products)";
+    try
+    {
+        SqlDataAdapter adapter = new SqlDataAdapter(sel, conn);
+
+        DataTable data = new DataTable();
+
+        adapter.Fill(data);
+        Console.WriteLine("Самый старый товар на складе");
+
+        foreach (DataRow row in data.Rows)
+        {
+            var cells = row.ItemArray;
+            foreach (var cell in cells)
+            {
+                Console.Write(cell + " ");
             }
             Console.WriteLine();
         }
