@@ -4,3 +4,5 @@
  ## [Библиотека](https://github.com/nomadpyn/ADONET_Lessons/tree/master/l1_Library)
  
  ## [Овощи_и_Фрукты](https://github.com/nomadpyn/ADONET_Lessons/tree/master/l2_Veg_Frt)
+
+ ## [Склад](https://github.com/nomadpyn/ADONET_Lessons/tree/master/l3_Warehouse)
