@@ -5,7 +5,7 @@ using Microsoft.Data.SqlClient;
 string connection = @"Data Source = (localdb)\MSSQLLocalDB; Initial Catalog = Warehouse; Integrated Security = true";
 SqlConnection conn = new SqlConnection(connection);
 
-showMinOrMaxCount(ref conn, "max");
+showMinOrMaxSelfPrice(ref conn);
 static List<int> showAllProducts(ref SqlConnection conn)
 {
     List<int> indexes = new List<int>();
@@ -126,6 +126,41 @@ static void showMinOrMaxCount(ref SqlConnection conn, string arg = "min")
     {
         sel = "SELECT prodName, prodCount FROM Products WHERE prodCount = (SELECT MAX(prodCount) From Products)";
         message = "Товар с максимальным количеством :";
+    }
+
+    try
+    {
+        SqlDataAdapter adapter = new SqlDataAdapter(sel, conn);
+
+        DataTable data = new DataTable();
+
+        adapter.Fill(data);
+
+        Console.WriteLine(message);
+        foreach (DataRow row in data.Rows)
+        {
+            var cells = row.ItemArray;
+            foreach (var cell in cells)
+            {
+                Console.Write(cell + "\t");
+            }
+            Console.WriteLine();
+        }
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex.Message);
+    }
+}
+
+static void showMinOrMaxSelfPrice(ref SqlConnection conn, string arg = "min")
+{
+    string sel = "SELECT prodName, prodSelfPrice FROM Products WHERE prodSelfPrice = (SELECT MIN(prodSelfPrice) From Products)";
+    string message = "Товар с минимальной себестоимостью :";
+    if (arg == "max")
+    {
+        sel = "SELECT prodName, prodSelfPrice FROM Products WHERE prodSelfPrice = (SELECT MAX(prodSelfPrice) From Products)";
+        message = "Товар с максимальной себестоимостью :";
     }
 
     try
