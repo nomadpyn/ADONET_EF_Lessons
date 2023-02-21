@@ -284,3 +284,62 @@ static void oldestProduct (ref SqlConnection conn)
         Console.WriteLine(ex.Message);
     }
 }
+
+static void addPrdType(ref SqlConnection conn)
+{
+    string select = "select typeName from prdType";
+
+    try
+    {
+        SqlDataAdapter adapter = new SqlDataAdapter(select, conn);
+        SqlCommandBuilder commandBuilder= new SqlCommandBuilder(adapter);
+
+        DataTable dt = new DataTable();
+
+        adapter.Fill(dt);
+        foreach (DataRow row in dt.Rows)
+        {
+            Console.WriteLine(row["typeName"]);
+        }
+        Console.WriteLine("\nВведите имя для нового типа товара");
+        DataRow newRow = dt.NewRow();
+        newRow["typeName"] = Console.ReadLine();
+        dt.Rows.Add(newRow);
+
+        adapter.Update(dt);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex.Message);
+    }
+}
+
+static void addPrdProvider(ref SqlConnection conn)
+{
+    string select = "select provName from prdProvider";
+
+    try
+    {
+        SqlDataAdapter adapter = new SqlDataAdapter(select, conn);
+        SqlCommandBuilder commandBuilder = new SqlCommandBuilder(adapter);
+
+        DataTable dt = new DataTable();
+
+        adapter.Fill(dt);
+        foreach (DataRow row in dt.Rows)
+        {
+
+            Console.WriteLine(row["provName"]);
+        }
+        Console.WriteLine("\nВведите имя нового поставщика");
+        DataRow newRow = dt.NewRow();
+        newRow["provName"] = Console.ReadLine();
+        dt.Rows.Add(newRow);
+
+        adapter.Update(dt);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex.Message);
+    }
+}
