@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data;
+﻿using System.Data;
 using Microsoft.Data.SqlClient;
 
 // создаем строку для подключения и само подключения к БД
@@ -425,6 +424,55 @@ static void addProduct(ref SqlConnection conn)
         adapter.Update(set);
     }
     catch(Exception ex)
+    {
+        Console.WriteLine(ex.Message);
+    }
+}
+
+// метод обновления информации о типах товара или поставщиках
+static void updPrdTypeOrProvider(ref SqlConnection conn, string arg = "type")
+{
+// выбираем индекс, позиции которую надо изменить методом selectTypeOrProvider
+    Console.WriteLine("Выберите позицию для изменения по индексу");
+    int change;
+// в зависимости от аргументов метода выбираем изменения поставщика или типа товара
+    if (arg == "provider")
+    {
+        change = selectTypeOrProvider(ref conn, "provider");
+        Console.WriteLine("Введите новое имя для этого поставщика");
+    }
+    else
+    {
+        change = selectTypeOrProvider(ref conn, "type");
+        Console.WriteLine("Введите новое имя для этого типа товара");
+    }
+// считываем новое имя
+    string newName = Console.ReadLine();    
+    try
+    {
+// в зависимости от аргументов создаем строку запроса и имя колонки для изменения данных
+        string sel = null;
+        string collumnName =null; 
+        if (arg == "provider")
+        {
+            sel = $"select id, provName from prdProvider where id = {change}";
+            collumnName = "provName";
+        }
+        else
+        {
+            sel = $"select id, typeName from prdType where id = {change}";
+            collumnName = "typeName";
+        }
+// создаем адаптер и считываем даннные
+        SqlDataAdapter adapter = new SqlDataAdapter(sel, conn);
+        SqlCommandBuilder cmd = new SqlCommandBuilder(adapter);
+        DataTable data = new DataTable();
+        adapter.Fill(data);
+// изменяем имя данных в выбранной колонке и обновляем данные в таблице
+        data.Rows[0][collumnName] = newName;
+        adapter.Update(data);                    
+    }
+    catch (Exception ex)
     {
         Console.WriteLine(ex.Message);
     }
