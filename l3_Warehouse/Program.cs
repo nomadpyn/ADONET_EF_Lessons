@@ -5,7 +5,7 @@ using Microsoft.Data.SqlClient;
 string connection = @"Data Source = (localdb)\MSSQLLocalDB; Initial Catalog = Warehouse; Integrated Security = true";
 SqlConnection conn = new SqlConnection(connection);
 
-
+delProvider(ref conn);
 
 // метод который показывает все товары на складе и возвращает список id 
 static List<int> showAllProducts(ref SqlConnection conn)
@@ -518,4 +518,157 @@ static int getIndex(ref List<int> indexes)
     while (!indexes.Contains(choise));
 
     return choise;
+}
+
+// метод удалине товара из основной таблицы
+static void delProduct(ref SqlConnection conn)
+{
+ // выводим список товаров, доступных к удалению
+    Console.WriteLine("Список товаров, доступных для удаления");
+    List<int> list = showAllProducts(ref conn);
+    int delId = getIndex(ref list);
+
+    try
+    {
+// создаем строку подключения, адаптер и commandBuilder
+        string select = $"select id, prodName from products where id = {delId}";
+        SqlDataAdapter adapter = new SqlDataAdapter(select, conn);
+        SqlCommandBuilder cmd = new SqlCommandBuilder(adapter);
+        DataTable data = new DataTable();
+        adapter.Fill(data);
+// подтверждаем удаление
+        Console.WriteLine($"Вы хотите удалить <<{data.Rows[0]["prodName"]}>> и все сопутствующие данные");
+        Console.WriteLine("Вы уверены Да(Y)/Нет(N)");
+        string choise = Console.ReadLine();
+        if(choise == "Y" || choise == "Да")
+        {
+            data.Rows[0].Delete();
+            adapter.Update(data);
+            Console.WriteLine("Данные успешно удалены");
+        }
+        else
+        {
+            Console.WriteLine("Вы отменили операцию удаления");
+        }
+    }
+    catch(Exception ex)
+    {
+        Console.WriteLine(ex.Message);
+    }
+}
+
+// метод удаления типа товара 
+static void delType(ref SqlConnection conn)
+{
+    try
+    {
+// создаем строку для запроса и адаптер для выгрузки данных
+        string select = "SELECT id, typeName FROM prdType " +
+            "WHERE id  NOT IN(Select distinct typeId from Products)";
+
+        SqlDataAdapter adapter = new SqlDataAdapter(select, conn);        
+        DataTable data = new DataTable();
+        adapter.Fill(data);
+// выводим список доступных для удаления типов товаров
+        Console.WriteLine("Следующие типы товаров доступны для удаления (т.к. нет взаимосвязей)");
+        List<int> indexes = new List<int>();
+// выводим имена и сохраняем в list их id
+        foreach(DataRow row in data.Rows)
+        {
+            Console.WriteLine(row["typeName"] + " " + row["id"]);
+            indexes.Add((int)row["id"]);
+        }
+// если что то доступно для удаления то предоставляем выбор
+        if (indexes.Count > 0)
+        {
+            int ind = getIndex(ref indexes);
+// очищаем list, адаптер и DataTable
+            indexes.Clear();
+            data.Clear();
+            adapter.Dispose();
+// новым запросом заполняем таблицу из БД
+            select = $"select id,typeName from prdType where id = {ind}";
+            adapter = new SqlDataAdapter(select, conn);
+            SqlCommandBuilder cmd = new SqlCommandBuilder(adapter);
+            adapter.Fill(data);
+// подтверждаем удаление
+            Console.WriteLine($"Вы хотите удалить <<{data.Rows[0]["typeName"]}>>");
+            Console.WriteLine("Вы уверены Да(Y)/Нет(N)");
+            string choise = Console.ReadLine();
+            if (choise == "Y" || choise == "Да")
+            {
+                data.Rows[0].Delete();
+                adapter.Update(data);
+                Console.WriteLine("Данные успешно удалены");
+            }
+            else
+            {
+                Console.WriteLine("Вы отменили операцию удаления");
+            }
+        }
+        else
+            Console.WriteLine("Нет доступных типов товара для удаления");
+    }
+    catch(Exception ex)
+    {
+        Console.WriteLine(ex.Message);
+    }
+}
+
+// метод удаление поставщиков
+static void delProvider(ref SqlConnection conn)
+{
+    try
+    {
+ // создаем строку для запроса и адаптер для выгрузки данных
+        string select = "SELECT id, provName FROM prdProvider " +
+            "WHERE id  NOT IN(Select distinct provId from Products)";
+
+        SqlDataAdapter adapter = new SqlDataAdapter(select, conn);
+        DataTable data = new DataTable();
+        adapter.Fill(data);
+// выводим список доступных для удаления поставщиков
+        Console.WriteLine("Следующие поставщики доступны для удаления (т.к. нет взаимосвязей)");
+        List<int> indexes = new List<int>();
+// выводим имена и сохраняем в list их id
+        foreach (DataRow row in data.Rows)
+        {
+            Console.WriteLine(row["provName"] + " " + row["id"]);
+            indexes.Add((int)row["id"]);
+        }
+// если что то доступно для удаления то предоставляем выбор
+        if (indexes.Count > 0)
+        {
+            int ind = getIndex(ref indexes);
+// очищаем list, адаптер и DataTable
+            indexes.Clear();
+            data.Clear();
+            adapter.Dispose();
+// новым запросом заполняем таблицу из БД
+            select = $"select id,provName from prdProvider where id = {ind}";
+            adapter = new SqlDataAdapter(select, conn);
+            SqlCommandBuilder cmd = new SqlCommandBuilder(adapter);
+            adapter.Fill(data);
+// подтверждаем удаление
+            Console.WriteLine($"Вы хотите удалить <<{data.Rows[0]["provName"]}>>");
+            Console.WriteLine("Вы уверены Да(Y)/Нет(N)");
+            string choise = Console.ReadLine();
+            if (choise == "Y" || choise == "Да")
+            {
+                data.Rows[0].Delete();
+                adapter.Update(data);
+                Console.WriteLine("Данные успешно удалены");
+            }
+            else
+            {
+                Console.WriteLine("Вы отменили операцию удаления");
+            }
+        }
+        else
+            Console.WriteLine("Нет доступных поставщиков для удаления");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex.Message);
+    }
 }
