@@ -45,22 +45,8 @@ static void showProduct(ref SqlConnection conn)
     Console.WriteLine("Список всех товаров");
 // получаем список всех id в базе данных вместе с выводом данных на экран
     List<int> ind = showAllProducts(ref conn);
-// запускаем цикл на корректный ввод данных от пользователя
-    int choise=-1;
-    do
-    {
-        Console.WriteLine("Выберите товар по индексу");
-        if (Int32.TryParse(Console.ReadLine(), out choise))
-        {
-            if (!ind.Contains(choise))
-            {
-                Console.WriteLine("Вы неправильно выбрали, попробуйте еще раз");
-            }
-        }
-        else
-            Console.WriteLine("Вы неправильно выбрали, попробуйте еще раз");
-    }
-    while (!ind.Contains(choise));
+    // запускаем цикл на корректный ввод данных от пользователя методом getIndex
+    int choise = getIndex(ref ind);
 // строка запроса на вывод всех данных о товаре из многотабличной базы данных
     string sel = "select prodName, typeName, provName, prodCount, prodSelfPrice,prodDate " +
         $"From Products AS P, prdType AS pT, prdProvider AS pP Where P.id = {choise} " + 
@@ -199,23 +185,9 @@ static void showAllByTypeOrProvider(ref SqlConnection conn, string arg = "type")
     Console.WriteLine(message);
 // получаем список индексов, в зависимости от аргументов, типа товаров или поставщики
     List<int> ind = showTypesOrProviders(ref conn, arg);
- // запускаем цикл на корректный ввод данных от пользователя
-    int choise = -1;
-    do
-    {
-        Console.WriteLine("Выберите по индексу");
-        if (Int32.TryParse(Console.ReadLine(), out choise))
-        {
-            if (!ind.Contains(choise))
-            {
-                Console.WriteLine("Вы неправильно выбрали, попробуйте еще раз");
-            }
-        }
-        else
-            Console.WriteLine("Вы неправильно выбрали, попробуйте еще раз");
-    }
-    while (!ind.Contains(choise));
- //создаем строку запроса в зависимости от аргументов, по умолчанию тип 
+// запускаем цикл на корректный ввод данных от пользователя методом getIndex
+    int choise = getIndex(ref ind);
+    //создаем строку запроса в зависимости от аргументов, по умолчанию тип 
     string sel = $"select  prodName From Products AS P, prdType AS pT Where P.typeId = pT.id AND P.typeId = {choise}";
     if(arg == "provider")
     {
@@ -360,22 +332,8 @@ static int selectTypeOrProvider(ref SqlConnection conn, string arg = "type")
             indexes.Add((int)row["id"]);
             Console.WriteLine(row[1] +" - " + row["id"]);             
         }
-// запускаем цикл на корректный ввод данных от пользователя
-        int choise = -1;
-        do
-        {
-            Console.WriteLine("Выберите по индексу");
-            if (Int32.TryParse(Console.ReadLine(), out choise))
-            {
-                if (!indexes.Contains(choise))
-                {
-                    Console.WriteLine("Вы неправильно выбрали, попробуйте еще раз");
-                }
-            }
-            else
-                Console.WriteLine("Вы неправильно выбрали, попробуйте еще раз");
-        }
-        while (!indexes.Contains(choise));
+// запускаем цикл на корректный ввод данных от пользователя методом getIndex
+        int choise = getIndex(ref indexes);
 
         return choise;
     }
@@ -476,4 +434,88 @@ static void updPrdTypeOrProvider(ref SqlConnection conn, string arg = "type")
     {
         Console.WriteLine(ex.Message);
     }
+}
+
+// метод обновления информации о товаре в БД
+static void updProduct(ref SqlConnection conn)
+{
+// выводим все продукты на консоль и получаем их id
+    List<int> list = showAllProducts(ref conn);
+    Console.WriteLine("Какой товар вы хотите изменить?");
+// запускаем цикл на корректный ввод данных от пользователя методом getIndex
+    int idProduct = getIndex(ref list);
+    Console.WriteLine("Для изменения данных введите их, для пропуска нажмите Enter");
+
+    try 
+    {
+        string select = $"Select * From Products Where id = {idProduct}";
+        // создаем адаптер и считываем даннные
+        SqlDataAdapter adapter = new SqlDataAdapter(select, conn);
+        SqlCommandBuilder cmd = new SqlCommandBuilder(adapter);
+        DataTable data = new DataTable();
+        adapter.Fill(data);
+// запрашиваем изменение имени товара
+        Console.WriteLine($"Текущее имя: {data.Rows[0]["prodName"]}");
+        Console.WriteLine("Введите имя товара");
+        string name = Console.ReadLine();
+        if(name != null && name != "")
+        {
+            data.Rows[0]["prodName"] = name;
+        }
+// запрашиваем изменение количества товара
+        Console.WriteLine($"Текущее количество: {data.Rows[0]["prodCount"]}");
+        Console.WriteLine("Введите количество товара");
+        if (Int32.TryParse(Console.ReadLine(), out int resultС))
+        {
+            if (resultС > 0)
+            {
+                data.Rows[0]["prodCount"] = resultС;
+            }
+        }
+// запрашиваем изменение себестоимости товара
+        Console.WriteLine($"Текущая себестоимость: {data.Rows[0]["prodSelfPrice"]}");
+        Console.WriteLine("Введите себестоимость товара");
+        if (Int32.TryParse(Console.ReadLine(), out int resultP))
+        {
+            if (resultP > 0)
+            {
+                data.Rows[0]["prodSelfPrice"] = resultP;
+            }
+        }
+// запрашиваем изменение даты поставки товара
+        Console.WriteLine($"Текущая дата поставки: {data.Rows[0]["prodDate"]}");
+        Console.WriteLine("Введите дату поставки товара(год, месяц, день)");
+        if (DateTime.TryParse(Console.ReadLine(), out DateTime dateTime))
+        {
+            data.Rows[0]["prodDate"] = dateTime;
+        }
+// синхронизируем данные с БД
+        adapter.Update(data);
+    }
+    catch(Exception ex)
+    {
+        Console.WriteLine(ex.Message);
+    }
+}
+
+// метод выбора id из list с данными
+static int getIndex(ref List<int> indexes)
+{
+    int choise = 0;
+    do
+    {
+        Console.WriteLine("Выберите товар по индексу");
+        if (Int32.TryParse(Console.ReadLine(), out choise))
+        {
+            if (!indexes.Contains(choise))
+            {
+                Console.WriteLine("Вы неправильно выбрали, попробуйте еще раз");
+            }
+        }
+        else
+            Console.WriteLine("Вы неправильно выбрали, попробуйте еще раз");
+    }
+    while (!indexes.Contains(choise));
+
+    return choise;
 }
