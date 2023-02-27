@@ -26,3 +26,15 @@ l3_Warehouse/.vs/l3_Warehouse/v17/.suo
 l3_Warehouse/obj/Debug/net6.0/.NETCoreApp,Version=v6.0.AssemblyAttributes.cs
 l3_Warehouse/obj/Debug/net6.0/l3_Warehouse.AssemblyInfo.cs
 l3_Warehouse/obj/Debug/net6.0/l3_Warehouse.GlobalUsings.g.cs
+l4_Async_Warehouse/.vs/l4_Async_Warehouse/v17/.suo
+l4_Async_Warehouse/obj/Debug/net6.0-windows/.NETCoreApp,Version=v6.0.AssemblyAttributes.cs
+l4_Async_Warehouse/obj/Debug/net6.0-windows/App.g.i.cs
+l4_Async_Warehouse/obj/Debug/net6.0-windows/l4_Async_Warehouse.AssemblyInfo.cs
+l4_Async_Warehouse/obj/Debug/net6.0-windows/MainWindow.g.i.cs
+l4_Async_Warehouse/obj/Debug/net6.0-windows/App.g.cs
+*.resources
+l4_Async_Warehouse/obj/Debug/net6.0-windows/l4_Async_Warehouse_jlqvr22g_wpftmp.AssemblyInfo.cs
+*.lref
+l4_Async_Warehouse/obj/Debug/net6.0-windows/l4_Async_Warehouse_v0vmcozc_wpftmp.AssemblyInfo.cs
+*.baml
+l4_Async_Warehouse/obj/Debug/net6.0-windows/MainWindow.g.cs
