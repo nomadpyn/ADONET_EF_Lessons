@@ -22,64 +22,68 @@ namespace l4_Async_Warehouse
     /// </summary>
     public partial class MainWindow : Window
     {
+// строка подключения к БД
         private const string connString= @"Data Source = (localdb)\MSSQLLocalDB; Initial Catalog = Warehouse; Integrated Security = true";
         public MainWindow()
         {
             InitializeComponent();
         }
-
+// асинхронный метод нажатия кнопки
         private async void startButton_Click(object sender, RoutedEventArgs e)
         {
-
+// создаем переменные, в которых происходит выполнение в двух потоках
             var task1= getDataFromDB(connString, "select * from Providers");
             var task2 = getDataFromDB(connString, "select * from ProductType");
-
+// выполняем методы и перекладываем данные в таблицы на форме
             gridProviders.ItemsSource =(await task1).DefaultView;
             gridProductTypes.ItemsSource = (await task2).DefaultView;          
         }
+// создаем асинхронный метод доступа к БД к разным таблицам одновременно
         private static async Task<DataTable> getDataFromDB(string connString, string sqlQuery)
         {
-            SqlConnection connection = new SqlConnection(connString);
-
-            await connection.OpenAsync();
-
-            //MessageBox.Show($"{sqlQuery} подключение создано");
-
-            SqlCommand cmd = new SqlCommand(sqlQuery, connection);
-
             DataTable table = new DataTable();
-
-            using (SqlDataReader reader = await cmd.ExecuteReaderAsync()) 
+            try
             {
-                int line = 0;
-                do
+                SqlConnection connection = new SqlConnection(connString);
+ // создаем асинхронное подключение и выводим об этом сообщение в messageBox
+                await connection.OpenAsync();
+                MessageBox.Show($"{sqlQuery} подключение создано");
+// создаем команду и выполняем асинхронное чтение с БД
+                SqlCommand cmd = new SqlCommand(sqlQuery, connection);
+                using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                 {
-                    while (await reader.ReadAsync())
+                    int line = 0;
+                    do
                     {
-                        if (line == 0)
+                        while (await reader.ReadAsync())
                         {
-                            for (int i = 0; i <
-                            reader.FieldCount; i++)
+                            if (line == 0)
                             {
-                                table.Columns.Add(reader.
-                                GetName(i));
+                                for (int i = 0; i <
+                                reader.FieldCount; i++)
+                                {
+                                    table.Columns.Add(reader.
+                                    GetName(i));
+                                }
+                                line++;
                             }
-                            line++;
+                            DataRow row = table.NewRow();
+                            for (int i = 0; i < reader.
+                            FieldCount; i++)
+                            {
+                                row[i] = await reader.
+                                GetFieldValueAsync<Object>(i);
+                            }
+                            table.Rows.Add(row);
                         }
-                        DataRow row = table.NewRow();
-                        for (int i = 0; i < reader.
-                        FieldCount; i++)
-                        {
-                            row[i] = await reader.
-                            GetFieldValueAsync<Object>(i);
-                        }
-                        table.Rows.Add(row);
-                    }
-                } while (reader.NextResult());
+                    } while (reader.NextResult());
+                }
+                MessageBox.Show($"{sqlQuery} подключение закрыто");
             }
-
-            //MessageBox.Show($"{sqlQuery} подключение закрыто");
-
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
             return table;
         }        
     }    
