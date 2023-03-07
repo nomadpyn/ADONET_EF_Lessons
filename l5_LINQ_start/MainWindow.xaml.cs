@@ -22,6 +22,8 @@ namespace l5_LINQ_start
     public partial class MainWindow : Window
     {
         BindingList<Product> dataList;
+        int args;
+        string direct;
         public MainWindow()
         {
             InitializeComponent();
@@ -29,12 +31,19 @@ namespace l5_LINQ_start
 
         private void selectByPriceButton_Click(object sender, RoutedEventArgs e)
         {
-            CountWindow nw = new CountWindow();            
-            nw.Show();
+            PriceWindow nw = new PriceWindow();            
+            nw.Owner = this;
+            nw.ShowDialog();
+            if (direct == "less")
+            {
+                var data = Func.getLessProductsPrice(ref dataList, this.args);
+                this.dataGrid.ItemsSource = null;
+                this.dataGrid.ItemsSource = data;
+            }
         }
         private void selectByCountButton_Click(object sender, RoutedEventArgs e)
         {
-            PriceWindow nw = new PriceWindow();
+            CountWindow nw = new CountWindow();
             nw.Show();
         }
 
@@ -55,6 +64,18 @@ namespace l5_LINQ_start
         public void addDataToList(Product obj)
         {
             this.dataList.Add(obj);
+        }
+
+        public void addByLinq(int args, string direct)
+        {
+            this.args = args;
+            this.direct = direct;
+        }
+
+        private void clearArgs()
+        {
+            this.args = 0;
+            this.direct = null;
         }
     }
 }

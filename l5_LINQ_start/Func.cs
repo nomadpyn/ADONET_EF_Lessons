@@ -75,5 +75,10 @@ namespace l5_LINQ_start
             }
             return 0;
         }
+
+        public static List<Product> getLessProductsPrice(ref BindingList<Product> products, int price)
+        {
+            return products.Where(p => p.Price < price).OrderBy(p => p.Price).ToList();
+        }
     }
 }
