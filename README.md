@@ -9,6 +9,12 @@
 
   [Склад](https://github.com/nomadpyn/ADONET_Lessons/tree/master/l3_Warehouse)
 
- ## Асинхронный доступ к БД в ADO.Net
+ ## Асинхронный доступ к БД в ADO.Net, LINQ
 
   [Асинхронный_Склад](https://github.com/nomadpyn/ADONET_Lessons/tree/master/l4_Async_Warehouse)
+
+  [LINQ_старт](https://github.com/nomadpyn/ADONET_Lessons/tree/master/l5_LINQ_start)
+
+ ## Entity Framework
+
+  [Библиотека_EF](https://github.com/nomadpyn/ADONET_Lessons/tree/master/l6_Library_EF)
