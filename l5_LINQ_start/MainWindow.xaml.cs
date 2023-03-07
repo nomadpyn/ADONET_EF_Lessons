@@ -41,5 +41,10 @@ namespace l5_LINQ_start
             AddWindow nw = new AddWindow();
             nw.Show();
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            dataGrid.ItemsSource = Func.getStartUpData();
+        }
     }
 }

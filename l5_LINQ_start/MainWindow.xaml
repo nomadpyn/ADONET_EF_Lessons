@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:l5_LINQ_start"
         mc:Ignorable="d"
-        Title="Продукты на складе" Height="450" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="Продукты на складе" Height="450" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -16,7 +16,13 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <DataGrid Name="dataGrid" Grid.RowSpan="3" Grid.Column="0" Grid.Row="0" Margin="10"></DataGrid>
+        <DataGrid Name="dataGrid" Grid.RowSpan="3" Grid.Column="0" Grid.Row="0" Margin="10" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Наименование" Binding="{Binding Path=Name}" Width="3*"/>
+                <DataGridTextColumn Header="Цена" Binding="{Binding Path=Price}" Width="*"/>
+                <DataGridTextColumn Header="Количество" Binding="{Binding Path=Count}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
         <Button Name="addButton" Grid.Column="1" Grid.Row="0" Margin="5,50,5,50" Click="addButton_Click">Добавить данные</Button>
         <Button Name="selectByPriceButton" Grid.Column="1" Grid.Row="1" Margin="5,50,5,50" Click="selectByPriceButton_Click">Выбрать по цене</Button>
         <Button Name="selectByCountButton" Grid.Column="1" Grid.Row="2" Margin="5,50,5,50" Click="selectByCountButton_Click">Выбрать по количеству</Button>
