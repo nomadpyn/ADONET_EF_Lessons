@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +21,7 @@ namespace l5_LINQ_start
     /// </summary>
     public partial class MainWindow : Window
     {
+        BindingList<Product> dataList;
         public MainWindow()
         {
             InitializeComponent();
@@ -27,7 +29,7 @@ namespace l5_LINQ_start
 
         private void selectByPriceButton_Click(object sender, RoutedEventArgs e)
         {
-            CountWindow nw = new CountWindow();
+            CountWindow nw = new CountWindow();            
             nw.Show();
         }
         private void selectByCountButton_Click(object sender, RoutedEventArgs e)
@@ -39,12 +41,20 @@ namespace l5_LINQ_start
         private void addButton_Click(object sender, RoutedEventArgs e)
         {
             AddWindow nw = new AddWindow();
+            nw.Owner = this;
             nw.Show();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            dataGrid.ItemsSource = Func.getStartUpData();
+
+            dataList = Func.getStartUpData();
+            dataGrid.ItemsSource = dataList;
+        }
+
+        public void addDataToList(Product obj)
+        {
+            this.dataList.Add(obj);
         }
     }
 }

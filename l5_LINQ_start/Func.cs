@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using Microsoft.Data.SqlClient;
+using System.Windows.Media.TextFormatting;
+using System.ComponentModel;
 
 namespace l5_LINQ_start
 {
@@ -12,9 +14,9 @@ namespace l5_LINQ_start
     {
         const string connString = "Data Source = (localdb)\\MSSQLLocalDB; Initial Catalog = Warehouse; Integrated Security = true";
 
-        public static List<Product> getStartUpData()
+        public static BindingList<Product> getStartUpData()
         {
-            List<Product> list = new List<Product>();
+            BindingList<Product> list = new BindingList<Product>();
             try
             {
                 SqlConnection conn = new SqlConnection(connString);
@@ -37,6 +39,41 @@ namespace l5_LINQ_start
             }
             catch (Exception ex) { }
             return list;
+        }
+
+        public static void addDataToDB(Product obj)
+        {
+            try
+            {
+                SqlConnection conn = new SqlConnection(connString);
+                string insert = "INSERT INTO Products (NameProd, PriceProd, CountProd) VALUES (@NameProd, @PriceProd, @CountProd)";
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(insert, conn);
+                SqlParameter paramName = new SqlParameter("@NameProd", SqlDbType.NVarChar);
+                paramName.Value = obj.Name;
+                cmd.Parameters.Add(paramName);
+                SqlParameter paramPrice = new SqlParameter("@PriceProd", SqlDbType.Int);
+                paramPrice.Value = obj.Price;
+                cmd.Parameters.Add(paramPrice);
+                SqlParameter paramCount = new SqlParameter("@CountProd", SqlDbType.Int);
+                paramCount.Value = obj.Count;
+                cmd.Parameters.Add(paramCount);
+                cmd.ExecuteNonQuery();
+                conn.Close();
+            }
+            catch (Exception ex) { }        
+        }
+        public static int GetIntData(string text)
+        {
+            int result;
+            if(Int32.TryParse(text,out result))
+            {
+                if(result > 0)
+                {
+                    return result;
+                }
+            }
+            return 0;
         }
     }
 }

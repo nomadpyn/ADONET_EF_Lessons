@@ -24,7 +24,6 @@ namespace l5_LINQ_start
             this.Price = price;
             this.Count = count;
         }
-
         public override string ToString()
         {
             return $"{this.Name}. Цена {this.Price} руб.\nКоличество на складе {this.Count} шт.";

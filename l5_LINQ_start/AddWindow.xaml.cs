@@ -18,10 +18,29 @@ namespace l5_LINQ_start
     /// Interaction logic for AddWindow.xaml
     /// </summary>
     public partial class AddWindow : Window
-    {
+    {        
         public AddWindow()
         {
-            InitializeComponent();
+            InitializeComponent();            
+        }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Product addProduct = new Product();
+                addProduct.Name = ProdNameBox.Text;
+                addProduct.Price = Func.GetIntData(ProdPriceBox.Text);
+                addProduct.Count = Func.GetIntData(ProdCountBox.Text);
+                MainWindow main = (MainWindow)this.Owner;
+                Func.addDataToDB(addProduct);
+                main.addDataToList(addProduct);
+                this.Close();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
