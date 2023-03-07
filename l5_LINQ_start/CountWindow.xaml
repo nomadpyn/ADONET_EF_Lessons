@@ -18,7 +18,7 @@
         </Grid.RowDefinitions>
         <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">Введите количество и выберите меньше или больше</TextBlock>
         <TextBox Name="getInt" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" VerticalAlignment="Center" Margin="100,0,100,0" TextAlignment="Center"></TextBox>
-        <Button Name="lessButton" Grid.Column="0" Grid.Row="2" Margin="5,10,5,10">Меньше введеного числа</Button>
-        <Button Name="moreButton" Grid.Column="1" Grid.Row="2" Margin="5,10,5,10">Больше введеного числа</Button>
+        <Button Name="lessButton" Grid.Column="0" Grid.Row="2" Margin="5,10,5,10" Click="lessButton_Click">Меньше введеного числа</Button>
+        <Button Name="moreButton" Grid.Column="1" Grid.Row="2" Margin="5,10,5,10" Click="moreButton_Click">Больше введеного числа</Button>
     </Grid>
 </Window>

@@ -23,5 +23,21 @@ namespace l5_LINQ_start
         {
             InitializeComponent();
         }
+
+        private void lessButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow main = (MainWindow)this.Owner;
+            int args = Func.GetIntData(getInt.Text);
+            main.addByLinq(args, "less");
+            this.Close();
+        }
+
+        private void moreButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow main = (MainWindow)this.Owner;
+            int args = Func.GetIntData(getInt.Text);
+            main.addByLinq(args, "more");
+            this.Close();
+        }
     }
 }

@@ -34,17 +34,38 @@ namespace l5_LINQ_start
             PriceWindow nw = new PriceWindow();            
             nw.Owner = this;
             nw.ShowDialog();
-            if (direct == "less")
+            if (this.direct == "less")
             {
                 var data = Func.getLessProductsPrice(ref dataList, this.args);
                 this.dataGrid.ItemsSource = null;
                 this.dataGrid.ItemsSource = data;
             }
+            if (this.direct == "more")
+            {
+                var data = Func.getMoreProductsPrice(ref dataList, this.args);
+                this.dataGrid.ItemsSource = null;
+                this.dataGrid.ItemsSource = data;
+            }
+            this.clearArgs();
         }
         private void selectByCountButton_Click(object sender, RoutedEventArgs e)
         {
             CountWindow nw = new CountWindow();
-            nw.Show();
+            nw.Owner = this;
+            nw.ShowDialog();
+            if (this.direct == "less")
+            {
+                var data = Func.getLessProductsCount(ref dataList, this.args);
+                this.dataGrid.ItemsSource = null;
+                this.dataGrid.ItemsSource = data;
+            }
+            if (this.direct == "more")
+            {
+                var data = Func.getMoreProductsCount(ref dataList, this.args);
+                this.dataGrid.ItemsSource = null;
+                this.dataGrid.ItemsSource = data;
+            }
+            this.clearArgs();
         }
 
         private void addButton_Click(object sender, RoutedEventArgs e)

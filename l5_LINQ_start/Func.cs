@@ -80,5 +80,19 @@ namespace l5_LINQ_start
         {
             return products.Where(p => p.Price < price).OrderBy(p => p.Price).ToList();
         }
+
+        public static List<Product> getMoreProductsPrice(ref BindingList<Product> products, int price)
+        {
+            return products.Where(p => p.Price > price).OrderBy(p => p.Price).ToList();
+        }
+        public static List<Product> getLessProductsCount(ref BindingList<Product> products, int count)
+        {
+            return products.Where(p => p.Count < count).OrderBy(p => p.Count).ToList();
+        }
+
+        public static List<Product> getMoreProductsCount(ref BindingList<Product> products, int count)
+        {
+            return products.Where(p => p.Count > count).OrderBy(p => p.Count).ToList();
+        }
     }
 }
