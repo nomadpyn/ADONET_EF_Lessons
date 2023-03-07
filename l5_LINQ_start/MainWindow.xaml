@@ -17,8 +17,8 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <DataGrid Name="dataGrid" Grid.RowSpan="3" Grid.Column="0" Grid.Row="0" Margin="10"></DataGrid>
-        <Button Name="addButton" Grid.Column="1" Grid.Row="0" Margin="5,50,5,50">Добавить данные</Button>
-        <Button Name="selectByPriceButton" Grid.Column="1" Grid.Row="1" Margin="5,50,5,50">Выбрать по цене</Button>
-        <Button Name="selectByCountButton" Grid.Column="1" Grid.Row="2" Margin="5,50,5,50">Выбрать по количеству</Button>
+        <Button Name="addButton" Grid.Column="1" Grid.Row="0" Margin="5,50,5,50" Click="addButton_Click">Добавить данные</Button>
+        <Button Name="selectByPriceButton" Grid.Column="1" Grid.Row="1" Margin="5,50,5,50" Click="selectByPriceButton_Click">Выбрать по цене</Button>
+        <Button Name="selectByCountButton" Grid.Column="1" Grid.Row="2" Margin="5,50,5,50" Click="selectByCountButton_Click">Выбрать по количеству</Button>
     </Grid>
 </Window>

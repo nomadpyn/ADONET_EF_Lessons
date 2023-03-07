@@ -1,0 +1,24 @@
+﻿<Window x:Class="l5_LINQ_start.PriceWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:l5_LINQ_start"
+        mc:Ignorable="d"
+        Title="Выбор по цене" Height="200" Width="350" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">Введите цену и выберите меньше или больше</TextBlock>
+        <TextBox Name="getInt" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" VerticalAlignment="Center" Margin="100,0,100,0" TextAlignment="Center"></TextBox>
+        <Button Name="lessButton" Grid.Column="0" Grid.Row="2" Margin="5,10,5,10">Меньше введеного числа</Button>
+        <Button Name="moreButton" Grid.Column="1" Grid.Row="2" Margin="5,10,5,10">Больше введеного числа</Button>
+    </Grid>
+</Window>

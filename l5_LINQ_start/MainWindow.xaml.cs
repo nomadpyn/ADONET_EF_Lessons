@@ -23,6 +23,23 @@ namespace l5_LINQ_start
         public MainWindow()
         {
             InitializeComponent();
+        }               
+
+        private void selectByPriceButton_Click(object sender, RoutedEventArgs e)
+        {
+            CountWindow nw = new CountWindow();
+            nw.Show();
+        }
+        private void selectByCountButton_Click(object sender, RoutedEventArgs e)
+        {
+            PriceWindow nw = new PriceWindow();
+            nw.Show();
+        }
+
+        private void addButton_Click(object sender, RoutedEventArgs e)
+        {
+            AddWindow nw = new AddWindow();
+            nw.Show();
         }
     }
 }
