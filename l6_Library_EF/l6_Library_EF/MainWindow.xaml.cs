@@ -24,5 +24,11 @@ namespace l6_Library_EF
         {
             InitializeComponent();
         }
+
+        private void loadBooksButton_Click(object sender, RoutedEventArgs e)
+        {
+            booksGrid.ItemsSource = null;
+            booksGrid.ItemsSource = ViewModel.getAllBooks().DefaultView;
+        }
     }
 }
