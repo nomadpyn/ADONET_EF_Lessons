@@ -30,5 +30,25 @@ namespace l6_Library_EF
             booksGrid.ItemsSource = null;
             booksGrid.ItemsSource = ViewModel.getAllBooks().DefaultView;
         }
+        private void loadAutButton_Click(object sender, RoutedEventArgs e)
+        {
+            authorsGrid.ItemsSource = null;
+            List<Author> data;
+            using (LibraryEntities db = new LibraryEntities())
+            {
+                data = db.Author.ToList();
+            }
+            authorsGrid.ItemsSource = data;
+        }
+        private void loadPubButton_Click(object sender, RoutedEventArgs e)
+        {
+            publGrid.ItemsSource = null;
+            List<Publisher> data;
+            using (LibraryEntities db = new LibraryEntities())
+            {
+                data = db.Publisher.ToList();
+            }
+            publGrid.ItemsSource = data;
+        }        
     }
 }
