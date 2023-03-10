@@ -27,7 +27,6 @@ namespace l6_Library_EF
                     {
                         DataRow row = data.NewRow();
 
-                        row["id"] = books[i].Id;
                         row["bookName"] = books[i].Title;
                         row["author"] = books[i].Author.FirstName + " " + books[i].Author.LastName;
                         row["pages"] = books[i].Pages;
@@ -45,15 +44,67 @@ namespace l6_Library_EF
             return data;
         }
 
+        public static DataTable getAllAuthors()
+        {
+            DataTable data = createAuthorTable();
+
+            try
+            {
+                List<Author> authors;
+                using (LibraryEntities db = new LibraryEntities())
+                {
+                    authors = db.Author.ToList();
+
+                    for (int i = 0; i < authors.Count; i++)
+                    {
+                        DataRow row = data.NewRow();
+
+                        row["Name"] = authors[i].FirstName;
+                        row["Fname"] = authors[i].LastName;
+                        row["Books"] = authors[i].Book.Count();
+                        data.Rows.Add(row);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
+            return data;
+        }
+        public static DataTable getAllPublishers()
+        {
+            DataTable data = createPublishersTable();
+
+            try
+            {
+                List<Publisher> publishers;
+                using (LibraryEntities db = new LibraryEntities())
+                {
+                    publishers = db.Publisher.ToList();
+
+                    for (int i = 0; i < publishers.Count; i++)
+                    {
+                        DataRow row = data.NewRow();
+
+                        row["Name"] = publishers[i].PublisherName;
+                        row["Adress"] = publishers[i].Address;
+                        row["Books"] = publishers[i].Book.Count();
+                        data.Rows.Add(row);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
+            return data;
+        }
         private static DataTable createBookTable() 
         {
             DataTable books = new DataTable("Books");
-
-            DataColumn idColumn = new DataColumn();
-            idColumn.DataType = typeof(int);
-            idColumn.ColumnName = "id";
-            idColumn.AutoIncrement = true;
-            books.Columns.Add(idColumn);
 
             DataColumn bookName = new DataColumn();
             bookName.DataType = typeof(string);
@@ -80,11 +131,49 @@ namespace l6_Library_EF
             publish.ColumnName = "publish";
             books.Columns.Add(publish);
 
-            DataColumn[] keys = new DataColumn[1];
-            keys[0] = idColumn;
-            books.PrimaryKey = keys;
-
             return books;
+        }
+        private static DataTable createAuthorTable()
+        {
+            DataTable authors = new DataTable("Authors");
+
+            DataColumn Name = new DataColumn();
+            Name.DataType = typeof(string);
+            Name.ColumnName = "Name";
+            authors.Columns.Add(Name);
+
+            DataColumn Fname = new DataColumn();
+            Fname.DataType = typeof(string);
+            Fname.ColumnName = "Fname";
+            authors.Columns.Add(Fname);
+
+            DataColumn books = new DataColumn();
+            books.DataType = typeof(int);
+            books.ColumnName = "Books";
+            authors.Columns.Add(books);
+
+            return authors;
+        }
+        private static DataTable createPublishersTable()
+        {
+            DataTable publ = new DataTable("Publishers");
+
+            DataColumn Name = new DataColumn();
+            Name.DataType = typeof(string);
+            Name.ColumnName = "Name";
+            publ.Columns.Add(Name);
+
+            DataColumn Adress = new DataColumn();
+            Adress.DataType = typeof(string);
+            Adress.ColumnName = "Adress";
+            publ.Columns.Add(Adress);
+
+            DataColumn books = new DataColumn();
+            books.DataType = typeof(int);
+            books.ColumnName = "Books";
+            publ.Columns.Add(books);
+
+            return publ;
         }
 
         public static void addAuthor(Author obj)
