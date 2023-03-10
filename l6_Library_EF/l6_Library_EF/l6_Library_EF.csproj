@@ -93,6 +93,9 @@
     <Compile Include="updateAuthorWindow.xaml.cs">
       <DependentUpon>updateAuthorWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="updatePublisherWindow.xaml.cs">
+      <DependentUpon>updatePublisherWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel.cs" />
     <Page Include="addAuthorWindow.xaml">
       <SubType>Designer</SubType>
@@ -119,6 +122,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="updateAuthorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="updatePublisherWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

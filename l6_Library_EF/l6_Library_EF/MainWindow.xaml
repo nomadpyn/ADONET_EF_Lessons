@@ -60,7 +60,7 @@
                     </Grid.RowDefinitions>
                     <Button Name="loadPubButton" Grid.Column="0" Grid.Row="0" Margin="5" Click="loadPubButton_Click">Загрузить</Button>
                     <Button Name="addPubButton" Grid.Column="1" Grid.Row="0" Margin="5" Click="addPubButton_Click">Добавить</Button>
-                    <Button Name="updatePubButton" Grid.Column="2" Grid.Row="0" Margin="5">Изменить</Button>
+                    <Button Name="updatePubButton" Grid.Column="2" Grid.Row="0" Margin="5" Click="updatePubButton_Click">Изменить</Button>
                     <Button Name="deletePubButton" Grid.Column="3" Grid.Row="0" Margin="5">Удалить</Button>
                     <DataGrid Name="publGrid" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="1" Margin="5"/>
                 </Grid>

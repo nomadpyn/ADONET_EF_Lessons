@@ -1,0 +1,18 @@
+﻿<Window x:Class="l6_Library_EF.updatePublisherWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:l6_Library_EF"
+        mc:Ignorable="d"
+        Title="Изменение издателя" Height="300" Width="400" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+    <UniformGrid Columns="1">
+        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Выберите издателя из списка</TextBlock>
+        <ComboBox Name="publishersBox" VerticalAlignment="Center" Margin="30,0,30,0" SelectedValuePath ="Id" SelectionChanged="publishersBox_SelectionChanged"/>
+        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Введите новое название издательства</TextBlock>
+        <TextBox Name="publisherName" VerticalAlignment="Center" Margin="30,0,30,0" TextAlignment="Center"/>
+        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Введите новый адрес издательства</TextBlock>
+        <TextBox Name="publisherAdress" VerticalAlignment="Center" Margin="30,0,30,0" TextAlignment="Center"/>
+        <Button Name="updatePublisher" Margin="10" Click="updatePublisher_Click">Изменить</Button>
+    </UniformGrid>
+</Window>
