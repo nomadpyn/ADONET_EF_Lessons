@@ -57,5 +57,12 @@ namespace l6_Library_EF
             nw.Owner = this;
             nw.ShowDialog();
         }
+
+        private void updateAutButton_Click(object sender, RoutedEventArgs e)
+        {
+            updateAuthorWindow nw = new updateAuthorWindow();
+            nw.Owner = this.Owner;
+            nw.ShowDialog();
+        }
     }
 }

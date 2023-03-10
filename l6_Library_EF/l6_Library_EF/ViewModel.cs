@@ -101,5 +101,18 @@ namespace l6_Library_EF
 
             }
         }
+
+        public static void updAuthor(Author obj)
+        {
+            using( LibraryEntities db = new LibraryEntities())
+            {
+                Author upd = db.Author.Find(obj.Id);
+
+                upd.FirstName = obj.FirstName;
+                upd.LastName = obj.LastName;
+
+                db.SaveChanges();
+            }
+        }
     }     
 }
