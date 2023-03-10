@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity.Migrations.Builders;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -190,7 +191,6 @@ namespace l6_Library_EF
 
             }
         }
-
         public static void updAuthor(Author obj)
         {
             using( LibraryEntities db = new LibraryEntities())
@@ -221,5 +221,45 @@ namespace l6_Library_EF
                 MessageBox.Show("Нельзя удалить автора");
             }
         }
+        public static void addPublisher(Publisher obj)
+        {
+            using (LibraryEntities db = new LibraryEntities())
+            {
+                Publisher A = db.Publisher.Where(a => a.PublisherName == obj.PublisherName).Where(a => a.Address == obj.Address).FirstOrDefault();
+
+                if (A == null)
+                {
+                    db.Publisher.Add(obj);
+                    db.SaveChanges();
+                }
+            }
+        }
+        public static void updPublisher(Publisher obj)
+        {
+            using (LibraryEntities db = new LibraryEntities())
+            {
+                Publisher upd = db.Publisher.Find(obj.Id);
+                upd.PublisherName = obj.PublisherName;
+                upd.Address = obj.Address;
+                db.SaveChanges();
+            }
+        }
+        public static void delPublisher(Publisher obj)
+        {
+            try
+            {
+                using (LibraryEntities db = new LibraryEntities())
+                {
+                    Publisher del = db.Publisher.Find(obj.Id);
+                    db.Publisher.Remove(del);
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Нельзя удалить издательство");
+            }
+        }
+
     }     
 }

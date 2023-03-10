@@ -70,6 +70,9 @@
     <Compile Include="addAuthorWindow.xaml.cs">
       <DependentUpon>addAuthorWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="addPublisherWindow.xaml.cs">
+      <DependentUpon>addPublisherWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Author.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -92,6 +95,10 @@
     </Compile>
     <Compile Include="ViewModel.cs" />
     <Page Include="addAuthorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="addPublisherWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
