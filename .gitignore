@@ -19,3 +19,5 @@
 *.baml
 l6_Library_EF/.vs/l6_Library_EF/v17/.suo
 l6_Library_EF/packages/
+l6_Library_EF/l6_Library_EF/bin/
+l6_Library_EF/l6_Library_EF/obj/
