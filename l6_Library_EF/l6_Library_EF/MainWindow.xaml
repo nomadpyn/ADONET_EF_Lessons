@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:l6_Library_EF"
         mc:Ignorable="d"
-        Title="Библиотека" Height="400" Width="600">
+        Title="Библиотека" Height="400" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
         <TabControl>
             <TabItem Header="Книги">
@@ -40,7 +40,7 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Button Name="loadAutButton" Grid.Column="0" Grid.Row="0" Margin="5" Click="loadAutButton_Click">Загрузить</Button>
-                    <Button Name="addAutButton" Grid.Column="1" Grid.Row="0" Margin="5">Добавить</Button>
+                    <Button Name="addAutButton" Grid.Column="1" Grid.Row="0" Margin="5" Click="addAutButton_Click">Добавить</Button>
                     <Button Name="updateAutButton" Grid.Column="2" Grid.Row="0" Margin="5">Изменить</Button>
                     <Button Name="deleteAutButton" Grid.Column="3" Grid.Row="0" Margin="5">Удалить</Button>
                     <DataGrid Name="authorsGrid" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="1" Margin="5"/>

@@ -87,5 +87,19 @@ namespace l6_Library_EF
             return books;
         }
 
+        public static void addAuthor(Author obj)
+        {
+            using (LibraryEntities db = new LibraryEntities())
+            {
+                Author A = db.Author.Where(a => a.LastName == obj.LastName).Where(a => a.FirstName == obj.FirstName).FirstOrDefault();
+
+                if (A == null)
+                {
+                    db.Author.Add(obj);
+                    db.SaveChanges();
+                }
+
+            }
+        }
     }     
 }

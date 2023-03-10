@@ -49,6 +49,13 @@ namespace l6_Library_EF
                 data = db.Publisher.ToList();
             }
             publGrid.ItemsSource = data;
-        }        
+        }
+
+        private void addAutButton_Click(object sender, RoutedEventArgs e)
+        {
+            addAuthorWindow nw = new addAuthorWindow();
+            nw.Owner = this;
+            nw.ShowDialog();
+        }
     }
 }
