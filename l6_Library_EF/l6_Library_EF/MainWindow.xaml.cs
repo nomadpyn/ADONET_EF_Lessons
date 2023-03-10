@@ -75,5 +75,12 @@ namespace l6_Library_EF
             nw.Owner = this;
             nw.ShowDialog();
         }
+
+        private void deletePubButton_Click(object sender, RoutedEventArgs e)
+        {
+            deletePublisherWindow nw = new deletePublisherWindow();
+            nw.Owner = this;
+            nw.ShowDialog();
+        }
     }
 }
