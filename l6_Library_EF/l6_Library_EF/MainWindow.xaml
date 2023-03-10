@@ -42,7 +42,7 @@
                     <Button Name="loadAutButton" Grid.Column="0" Grid.Row="0" Margin="5" Click="loadAutButton_Click">Загрузить</Button>
                     <Button Name="addAutButton" Grid.Column="1" Grid.Row="0" Margin="5" Click="addAutButton_Click">Добавить</Button>
                     <Button Name="updateAutButton" Grid.Column="2" Grid.Row="0" Margin="5" Click="updateAutButton_Click">Изменить</Button>
-                    <Button Name="deleteAutButton" Grid.Column="3" Grid.Row="0" Margin="5">Удалить</Button>
+                    <Button Name="deleteAutButton" Grid.Column="3" Grid.Row="0" Margin="5" Click="deleteAutButton_Click">Удалить</Button>
                     <DataGrid Name="authorsGrid" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="1" Margin="5"/>
                 </Grid>
             </TabItem>

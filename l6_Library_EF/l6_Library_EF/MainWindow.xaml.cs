@@ -61,7 +61,14 @@ namespace l6_Library_EF
         private void updateAutButton_Click(object sender, RoutedEventArgs e)
         {
             updateAuthorWindow nw = new updateAuthorWindow();
-            nw.Owner = this.Owner;
+            nw.Owner = this;
+            nw.ShowDialog();
+        }
+
+        private void deleteAutButton_Click(object sender, RoutedEventArgs e)
+        {
+            deleteAuthorWindow nw = new deleteAuthorWindow();
+            nw.Owner = this;
             nw.ShowDialog();
         }
     }

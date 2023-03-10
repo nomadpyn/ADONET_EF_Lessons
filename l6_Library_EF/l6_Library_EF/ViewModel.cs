@@ -114,5 +114,23 @@ namespace l6_Library_EF
                 db.SaveChanges();
             }
         }
+        public static void delAuthor(Author obj)
+        {
+            try
+            {
+                using (LibraryEntities db = new LibraryEntities())
+                {
+                    Author del = db.Author.Find(obj.Id);
+
+                    db.Author.Remove(del);
+
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Нельзя удалить автора");
+            }
+        }
     }     
 }

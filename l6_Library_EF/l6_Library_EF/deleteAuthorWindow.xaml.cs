@@ -11,36 +11,34 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static System.Data.Entity.Infrastructure.Design.Executor;
 
 namespace l6_Library_EF
 {
     /// <summary>
-    /// Interaction logic for updateAuthorWindow.xaml
+    /// Interaction logic for deleteAuthorWindow.xaml
     /// </summary>
-    public partial class updateAuthorWindow : Window
+    public partial class deleteAuthorWindow : Window
     {
-        Author updated = new Author();
-        public updateAuthorWindow()
+        Author deleted = new Author();
+        public deleteAuthorWindow()
         {
             InitializeComponent();
             using (LibraryEntities db = new LibraryEntities())
             {
                 var data = db.Author.ToList();
-
                 authorsBox.ItemsSource = data;
             }
         }
 
         private void authorsBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-                updated.Id = (int)authorsBox.SelectedValue;
+            deleted.Id = (int)authorsBox.SelectedValue;
         }
 
-        private void updateAuthor_Click(object sender, RoutedEventArgs e)
+        private void deleteAuthor_Click(object sender, RoutedEventArgs e)
         {
-            updated.FirstName = authorName.Text;
-            updated.LastName = authorFname.Text;
-            ViewModel.updAuthor(updated);
+            ViewModel.delAuthor(deleted);
             this.Close();
         }
     }
