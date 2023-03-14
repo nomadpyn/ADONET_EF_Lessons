@@ -1,0 +1,47 @@
+﻿<Window x:Class="l6_Library_EF.addBookWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:l6_Library_EF"
+        mc:Ignorable="d"
+        Title="Добавление книги" Height="450" Width="400" ResizeMode="NoResize" WindowStartupLocation="CenterOwner"> 
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="0">
+            Введите название книги
+        </TextBlock>
+        <TextBox Name="bookName" VerticalAlignment="Center" Margin="30,0,30,0" TextAlignment="Center" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="1"/>
+        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="2">
+            Выберите автора книги
+        </TextBlock>
+        <ComboBox Name="authorsBox" VerticalAlignment="Center" Margin="30,0,30,0" SelectedValuePath ="Id" SelectionChanged ="authorsBox_SelectionChanged" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="3"/>
+        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="4">
+            Выберите издательство
+        </TextBlock>
+        <ComboBox Name="publBox" VerticalAlignment="Center" Margin="30,0,30,0" SelectedValuePath ="Id" SelectionChanged ="publBox_SelectionChanged" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="5"/>
+        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="6">
+            Введите количество страниц
+        </TextBlock>
+        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="6">
+            Введите цену книги
+        </TextBlock>
+        <TextBox Name="bookPages" VerticalAlignment="Center" Margin="30,0,30,0" TextAlignment="Center" Grid.Column="0" Grid.Row="7"/>
+        <TextBox Name="bookPrice" VerticalAlignment="Center" Margin="30,0,30,0" TextAlignment="Center" Grid.Column="1" Grid.Row="7"/>
+        <Button Name="addBook" Margin="10" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="8" Click="addBook_Click">Добавить</Button>
+    </Grid>
+</Window>

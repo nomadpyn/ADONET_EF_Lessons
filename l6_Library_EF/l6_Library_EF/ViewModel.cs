@@ -261,6 +261,34 @@ namespace l6_Library_EF
                 MessageBox.Show("Нельзя удалить издательство");
             }
         }
+        public static int GetIntData(string text)
+        {
+            int result;
+            if (Int32.TryParse(text, out result))
+            {
+                if (result > 0)
+                {
+                    return result;
+                }
+            }
+            return 1;
+        }
 
+        public static void addBook(Book obj)
+        {
+            using(LibraryEntities db = new LibraryEntities())
+            {
+                Book book = db.Book.Where(b => b.Title == obj.Title)
+                    .Where(b => b.IdAuthor == obj.IdAuthor)
+                    .Where(b => b.IdPublisher == obj.IdPublisher)
+                    .Where(b => b.Pages == obj.Pages)
+                    .FirstOrDefault();
+                if(book == null)
+                {
+                    db.Book.Add(obj);
+                    db.SaveChanges();
+                }
+            }
+        }
     }     
 }

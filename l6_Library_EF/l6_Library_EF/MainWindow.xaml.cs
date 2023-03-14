@@ -82,5 +82,12 @@ namespace l6_Library_EF
             nw.Owner = this;
             nw.ShowDialog();
         }
+
+        private void addBooksButton_Click(object sender, RoutedEventArgs e)
+        {
+            addBookWindow nw = new addBookWindow();
+            nw.Owner = this;
+            nw.ShowDialog();
+        }
     }
 }
