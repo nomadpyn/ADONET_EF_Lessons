@@ -67,10 +67,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="addBookWindow.xaml.cs">
+    <Compile Include="libraryWindows\addBookWindow.xaml.cs">
       <DependentUpon>addBookWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="deleteBookWindow.xaml.cs">
+    <Compile Include="libraryWindows\deleteBookWindow.xaml.cs">
       <DependentUpon>deleteBookWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="libraryWindows\addAuthorWindow.xaml.cs">
@@ -105,15 +105,15 @@
     <Compile Include="libraryWindows\updatePublisherWindow.xaml.cs">
       <DependentUpon>updatePublisherWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="updateBookWindow.xaml.cs">
+    <Compile Include="libraryWindows\updateBookWindow.xaml.cs">
       <DependentUpon>updateBookWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel.cs" />
-    <Page Include="addBookWindow.xaml">
+    <Page Include="libraryWindows\addBookWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="deleteBookWindow.xaml">
+    <Page Include="libraryWindows\deleteBookWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -153,7 +153,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="updateBookWindow.xaml">
+    <Page Include="libraryWindows\updateBookWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
