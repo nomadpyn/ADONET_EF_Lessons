@@ -22,7 +22,7 @@
                     </Grid.RowDefinitions>
                     <Button Name="loadBooksButton" Grid.Column="0" Grid.Row="0" Margin="5" Click="loadBooksButton_Click">Загрузить</Button>
                     <Button Name="addBooksButton" Grid.Column="1" Grid.Row="0" Margin="5" Click="addBooksButton_Click">Добавить</Button>
-                    <Button Name="updateBooksButton" Grid.Column="2" Grid.Row="0" Margin="5">Изменить</Button>
+                    <Button Name="updateBooksButton" Grid.Column="2" Grid.Row="0" Margin="5" Click="updateBooksButton_Click">Изменить</Button>
                     <Button Name="deleteBooksButton" Grid.Column="3" Grid.Row="0" Margin="5">Удалить</Button>
                     <DataGrid Name="booksGrid" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="1" Margin="5"/>
                 </Grid>                

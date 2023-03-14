@@ -102,6 +102,9 @@
     <Compile Include="libraryWindows\updatePublisherWindow.xaml.cs">
       <DependentUpon>updatePublisherWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="updateBookWindow.xaml.cs">
+      <DependentUpon>updateBookWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel.cs" />
     <Page Include="addBookWindow.xaml">
       <SubType>Designer</SubType>
@@ -140,6 +143,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="libraryWindows\updatePublisherWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="updateBookWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

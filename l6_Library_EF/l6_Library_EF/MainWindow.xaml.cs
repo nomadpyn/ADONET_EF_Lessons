@@ -89,5 +89,12 @@ namespace l6_Library_EF
             nw.Owner = this;
             nw.ShowDialog();
         }
+
+        private void updateBooksButton_Click(object sender, RoutedEventArgs e)
+        {
+            updateBookWindow nw = new updateBookWindow();
+            nw.Owner = this;
+            nw.ShowDialog();
+        }
     }
 }

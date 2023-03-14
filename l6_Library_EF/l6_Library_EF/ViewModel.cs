@@ -273,7 +273,6 @@ namespace l6_Library_EF
             }
             return 1;
         }
-
         public static void addBook(Book obj)
         {
             using(LibraryEntities db = new LibraryEntities())
@@ -288,6 +287,19 @@ namespace l6_Library_EF
                     db.Book.Add(obj);
                     db.SaveChanges();
                 }
+            }
+        }
+        public static void updBook(Book obj)
+        {
+            using (LibraryEntities db = new LibraryEntities())
+            {
+                Book upd = db.Book.Find(obj.Id);
+                upd.Title = obj.Title;
+                upd.IdAuthor = obj.IdAuthor;
+                upd.IdPublisher = obj.IdPublisher; 
+                upd.Pages = obj.Pages;
+                upd.Price = obj.Price;
+                db.SaveChanges();
             }
         }
     }     

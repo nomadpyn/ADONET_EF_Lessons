@@ -23,5 +23,10 @@ namespace l6_Library_EF.Model
     
         public virtual Author Author { get; set; }
         public virtual Publisher Publisher { get; set; }
+
+        public override string ToString()
+        {
+            return $"{this.Title}, {this.Author.LastName}, {this.Publisher.PublisherName}";
+        }
     }
 }
