@@ -67,10 +67,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="addAuthorWindow.xaml.cs">
+    <Compile Include="Window\addAuthorWindow.xaml.cs">
       <DependentUpon>addAuthorWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="addPublisherWindow.xaml.cs">
+    <Compile Include="Window\addPublisherWindow.xaml.cs">
       <DependentUpon>addPublisherWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Author.cs">
@@ -79,10 +79,10 @@
     <Compile Include="Book.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="deleteAuthorWindow.xaml.cs">
+    <Compile Include="Window\deleteAuthorWindow.xaml.cs">
       <DependentUpon>deleteAuthorWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="deletePublisherWindow.xaml.cs">
+    <Compile Include="Window\deletePublisherWindow.xaml.cs">
       <DependentUpon>deletePublisherWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model1.cs">
@@ -93,26 +93,26 @@
     <Compile Include="Publisher.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="updateAuthorWindow.xaml.cs">
+    <Compile Include="Window\updateAuthorWindow.xaml.cs">
       <DependentUpon>updateAuthorWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="updatePublisherWindow.xaml.cs">
+    <Compile Include="Window\updatePublisherWindow.xaml.cs">
       <DependentUpon>updatePublisherWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel.cs" />
-    <Page Include="addAuthorWindow.xaml">
+    <Page Include="Window\addAuthorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="addPublisherWindow.xaml">
+    <Page Include="Window\addPublisherWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="deleteAuthorWindow.xaml">
+    <Page Include="Window\deleteAuthorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="deletePublisherWindow.xaml">
+    <Page Include="Window\deletePublisherWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -128,11 +128,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="updateAuthorWindow.xaml">
+    <Page Include="Window\updateAuthorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="updatePublisherWindow.xaml">
+    <Page Include="Window\updatePublisherWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
