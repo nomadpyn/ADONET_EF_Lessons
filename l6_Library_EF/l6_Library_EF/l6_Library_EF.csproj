@@ -70,6 +70,9 @@
     <Compile Include="addBookWindow.xaml.cs">
       <DependentUpon>addBookWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="deleteBookWindow.xaml.cs">
+      <DependentUpon>deleteBookWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="libraryWindows\addAuthorWindow.xaml.cs">
       <DependentUpon>addAuthorWindow.xaml</DependentUpon>
     </Compile>
@@ -107,6 +110,10 @@
     </Compile>
     <Compile Include="ViewModel.cs" />
     <Page Include="addBookWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="deleteBookWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

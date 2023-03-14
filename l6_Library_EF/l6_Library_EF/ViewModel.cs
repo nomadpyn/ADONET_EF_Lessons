@@ -302,5 +302,21 @@ namespace l6_Library_EF
                 db.SaveChanges();
             }
         }
+        public static void delBook(Book obj)
+        {
+            try
+            {
+                using (LibraryEntities db = new LibraryEntities())
+                {
+                    Book del = db.Book.Find(obj.Id);
+                    db.Book.Remove(del);
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Нельзя удалить книгу");
+            }
+        }
     }     
 }

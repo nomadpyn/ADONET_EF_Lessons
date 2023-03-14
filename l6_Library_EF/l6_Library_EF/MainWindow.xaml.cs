@@ -96,5 +96,12 @@ namespace l6_Library_EF
             nw.Owner = this;
             nw.ShowDialog();
         }
+
+        private void deleteBooksButton_Click(object sender, RoutedEventArgs e)
+        {
+            deleteBookWindow nw = new deleteBookWindow();
+            nw.Owner = this;
+            nw.ShowDialog();
+        }
     }
 }
