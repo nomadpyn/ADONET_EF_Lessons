@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace l6_Library_EF
+namespace l6_Library_EF.Model
 {
     using System;
     using System.Collections.Generic;
