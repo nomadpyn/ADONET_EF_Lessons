@@ -25,6 +25,7 @@ namespace l6_Library_EF
         public deleteAuthorWindow()
         {
             InitializeComponent();
+// забираем список авторов из БД для вывода в список в окне
             using (LibraryEntities db = new LibraryEntities())
             {
                 var data = db.Author.ToList();
@@ -32,13 +33,17 @@ namespace l6_Library_EF
             }
         }
 
+// обработка изменения состояния списка авторов
         private void authorsBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+// берем значение id автора, которого хотим удалить 
             deleted.Id = (int)authorsBox.SelectedValue;
         }
 
+// обработка нажатия кнопки удалить автора
         private void deleteAuthor_Click(object sender, RoutedEventArgs e)
         {
+// запускаем метод удаления автора и закрываем окно
             ViewModel.delAuthor(deleted);
             this.Close();
         }

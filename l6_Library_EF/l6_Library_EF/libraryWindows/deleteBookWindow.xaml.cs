@@ -27,6 +27,7 @@ namespace l6_Library_EF
 
             using (LibraryEntities db = new LibraryEntities())
             {
+// загружаем из БД книги, авторов и издателей
                 var books = db.Book.ToList();
                 var authors = db.Author.ToList();
                 var publishers = db.Publisher.ToList();
@@ -34,13 +35,17 @@ namespace l6_Library_EF
             }
         }
 
+// обработка изменения состояния списка книг
         private void bookBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+// берем значение id книги
             deleted.Id = (int)bookBox.SelectedValue;
         }
 
+// обработка нажатия кнопки удалить
         private void deleteBook_Click(object sender, RoutedEventArgs e)
         {
+// запускаем метод удаления книги и закрываем окно
             ViewModel.delBook(deleted);
             this.Close();
         }

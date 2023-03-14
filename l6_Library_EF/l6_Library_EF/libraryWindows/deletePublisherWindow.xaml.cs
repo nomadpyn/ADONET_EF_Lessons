@@ -26,18 +26,23 @@ namespace l6_Library_EF
             InitializeComponent();
             using (LibraryEntities db = new LibraryEntities())
             {
+// загружаем список издателей из БД в список
                 var data = db.Publisher.ToList();
                 publisherBox.ItemsSource = data;
             }
         }
 
+// метод обработки состояния списка издателей
         private void publisherBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+// берем значение id издателя
             deleted.Id = (int)publisherBox.SelectedValue;
         }
 
+// метод обработки нажатия кнопки удалить
         private void deletePublisher_Click(object sender, RoutedEventArgs e)
         {
+// запускаем метод удаления издателя и закрываем окно
             ViewModel.delPublisher(deleted);
             this.Close();
         }

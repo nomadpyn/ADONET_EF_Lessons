@@ -25,12 +25,15 @@ namespace l6_Library_EF
             InitializeComponent();
         }
 
+// обработка нажатия кнопки добавить автора
         private void addAuthor_Click(object sender, RoutedEventArgs e)
         {
+// создаем новый обьект автор
             Author newAuthor = new Author();
+// берем данные в него из полей в окне
             newAuthor.FirstName = authorName.Text;
             newAuthor.LastName = authorFname.Text;
-
+// запускаем метод добавления автора и закрываем окно
             ViewModel.addAuthor(newAuthor);
             this.Close();
         }

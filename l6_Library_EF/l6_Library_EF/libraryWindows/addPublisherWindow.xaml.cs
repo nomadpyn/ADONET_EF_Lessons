@@ -25,12 +25,15 @@ namespace l6_Library_EF
             InitializeComponent();
         }
 
+// обработка нажатия кнопки добавить издателя
         private void addPubl_Click(object sender, RoutedEventArgs e)
         {
+// создаем объект издателя 
             Publisher newPubl = new Publisher();
+// добавляем ему данные полей
             newPubl.PublisherName = publName.Text;
             newPubl.Address = publAdress.Text;
-
+// запускаем метод добавления издателя и закрываем окно
             ViewModel.addPublisher(newPubl);
             this.Close();
         }

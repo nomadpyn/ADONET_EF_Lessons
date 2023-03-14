@@ -26,21 +26,26 @@ namespace l6_Library_EF
             InitializeComponent();
             using (LibraryEntities db = new LibraryEntities())
             {
+// загружаем список издателей из БД
                 var data = db.Publisher.ToList();
 
                 publishersBox.ItemsSource = data;
             }
         }
 
+// обработка изменения состояния списка издателей
         private void publishersBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+// берем id издателя, которого изменяем
             updated.Id = (int)publishersBox.SelectedValue;
         }
 
         private void updatePublisher_Click(object sender, RoutedEventArgs e)
         {
+// заполяем поля сущности из формы
             updated.PublisherName = publisherName.Text;
             updated.Address = publisherAdress.Text;
+// запускаем метод изменения издателя и закрываем форму
             ViewModel.updPublisher(updated);
             this.Close();
         }
