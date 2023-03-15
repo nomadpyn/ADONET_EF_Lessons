@@ -18,3 +18,5 @@
  ## Entity Framework
 
   [Библиотека_EF](https://github.com/nomadpyn/ADONET_Lessons/tree/master/l6_Library_EF)
+
+  [Человек_CodeFirst](https://github.com/nomadpyn/ADONET_Lessons/tree/master/l7_Human_CodeFirst)
