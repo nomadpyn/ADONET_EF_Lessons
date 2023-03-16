@@ -44,6 +44,51 @@ namespace l7_Human_CodeFirst
                 Console.WriteLine(e.Message);
             }
         }
+
+        public static void updateHuman(int id)
+        {
+            try
+            {
+                using (HumanContext db = new HumanContext())
+                {
+                    Human hum = db.Humans.Find(id);
+                    if (hum != null)
+                    {
+                        Human upd = createHuman();
+                        hum.Name = upd.Name;
+                        hum.Fname = upd.Fname;
+                        hum.Gender = upd.Gender;
+                        hum.Age = upd.Age;
+                        db.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
+        public static void deleteHuman(int id)
+        {
+            try
+            {
+                using (HumanContext db = new HumanContext())
+                {
+                    Human hum = db.Humans.Find(id);
+                    if (hum != null)
+                    {
+                        db.Humans.Remove(hum);
+                        db.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
         private static Human createHuman()
         {
             Console.WriteLine("Введите фамилию человека");

@@ -24,7 +24,7 @@ namespace l7_Human_CodeFirst
 
         public override string ToString()
         {
-            return this.Fname + " " + this.Name + "\nПол: " + this.Gender
+            return "HumanId: " + this.Id + "\n" + this.Fname + " " + this.Name + "\nПол: " + this.Gender
                 + " Возраст " + this.Age;
         }
     }
