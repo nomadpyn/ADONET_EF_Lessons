@@ -1,4 +1,8 @@
 ﻿
+
+
 using l7_Human_CodeFirst;
 
-Func.showHumans();
+Menu menu = new Menu();
+
+menu.Start();
