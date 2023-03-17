@@ -21,4 +21,4 @@
 
   [Человек_CodeFirst](https://github.com/nomadpyn/ADONET_Lessons/tree/master/l7_Human_CodeFirst)
 
-  [Игра_Migration](https://github.com/nomadpyn/ADONET_Lessons/tree/master/l8_Game_Migration)
+  [Игра_Migration](https://github.com/nomadpyn/ADONET_Lessons/tree/master/l8_Game_Migr)
