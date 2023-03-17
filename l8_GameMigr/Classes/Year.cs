@@ -10,10 +10,7 @@ namespace l8_GameMigr.Classes
     {
         public int Id { get; set; }
         public int Value { get; set; }
-        public Year(int value) 
-        {
-            this.Value = value;
-        }
+        public ICollection<Game> Games { get; set; }
 
         public override string ToString()
         {

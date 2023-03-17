@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using l8_GameMigr;
 
@@ -10,9 +11,11 @@ using l8_GameMigr;
 namespace l8_GameMigr.Migrations
 {
     [DbContext(typeof(GmContext))]
-    partial class GmContextModelSnapshot : ModelSnapshot
+    [Migration("20230317101042_AddYear")]
+    partial class AddYear
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -13,23 +13,11 @@ namespace l8_GameMigr.Classes
         public string? Title { get; set; }
 
         public string? Description { get; set; }
-        public Year Released { get; set; }
-
-        public Game(string title, string description)
-        {
-            Title = title;
-            Description = description;
-        }
-        public Game(string title, string description, Year released)
-        {
-            Title = title;
-            Description = description;
-            Released = released;
-        }
+        public Year Year { get; set; }
 
         public override string ToString()
         {
-            return Title + "\nГод выхода: " + Released  + "\n" + Description;
+            return Title + "\nГод выхода: " + Year  + "\n" + Description;
         }
     }
 }

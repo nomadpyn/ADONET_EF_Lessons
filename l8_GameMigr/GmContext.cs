@@ -11,6 +11,7 @@ namespace l8_GameMigr
     public class GmContext : DbContext
     {
         public DbSet<Game> Games { get; set; }
+        public DbSet<Year> Years { get; set; }
 
         public GmContext() { }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
