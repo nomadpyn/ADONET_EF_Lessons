@@ -21,7 +21,7 @@ namespace l8_GameMigr.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("l8_GameMigr.Classes.Game", b =>
+            modelBuilder.Entity("l8_GameMigr.Game", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -32,44 +32,12 @@ namespace l8_GameMigr.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ReleasedId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ReleasedId");
-
-                    b.ToTable("Games");
-                });
-
-            modelBuilder.Entity("l8_GameMigr.Classes.Year", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Value")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Year");
-                });
-
-            modelBuilder.Entity("l8_GameMigr.Classes.Game", b =>
-                {
-                    b.HasOne("l8_GameMigr.Classes.Year", "Released")
-                        .WithMany()
-                        .HasForeignKey("ReleasedId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Released");
+                    b.ToTable("Games", (string)null);
                 });
 #pragma warning restore 612, 618
         }
